@@ -1,0 +1,22 @@
+services:
+
+  api:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+    environment:
+      DB_HOST: host.docker.internal
+      DB_USER: 'me'
+      DB_PASSWORD: 'password'
+      DB_NAME: 'movie_rental'
+      DB_PORT: 5432
+    command: npm run start:dev
+
+  db:
+    image: postgres:14.6
+    environment:
+      POSTGRES_USER: 'me'
+      POSTGRES_PASSWORD: 'password'
+      POSTGRES_DB: 'movie_rental'
